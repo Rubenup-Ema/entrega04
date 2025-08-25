@@ -1,0 +1,31 @@
+<div class="container-fluid">
+
+
+   <div class="row mt-1">
+
+        <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded border">
+        <h5 class="mb-0 d-flex"><mat-icon>how_to_reg</mat-icon> Estudiantes</h5>
+        <button class="btn btn-primary" (click)="newStudent()">Nuevo</button>
+        </div>
+
+    </div>
+
+    <div class="row mt-2">
+
+         <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded border">
+
+             <div  class="w-100" >
+                 
+                 <app-students-table *ngIf="formVisible[0]===true"  [students]="students" (studentDelete)="onDelete($event)" (studentEdit)="onEdit($event)"></app-students-table>
+                 <app-add-student *ngIf="formVisible[1]" [courses]="courses" (noChanges)="noChangeNewSudent($event)" (studentAdded)="addStudent($event)"></app-add-student>
+                 <app-edit-student *ngIf="formVisible[2]" [courses]="courses" [studentEdit]="editStudent" (noChanges)="noChangeNewSudent($event)" (studentEdited)="editedStudent($event)"></app-edit-student>
+             </div>
+
+        
+
+         </div>
+
+    </div>
+
+
+</div>

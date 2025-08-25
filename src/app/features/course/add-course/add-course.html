@@ -1,0 +1,68 @@
+<div class="container bg-light">
+  <h2>Añadir Curso</h2>
+
+  <form class="mb-3" [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+    
+    <!-- Campo ID -->
+    <div class="form-group">
+      <label for="dni">ID:</label>
+      <input 
+        type="text" 
+        class="form-control"
+        id="id" 
+        formControlName="id" 
+        placeholder="Ingrese ID"
+        readonly>
+      <div *ngIf="courseForm.get('dni')?.invalid && courseForm.get('dni')?.touched">
+        DNI es requerido
+      </div>
+    </div>
+
+    <!-- Campo Title -->
+    <div class="form-group">
+      <label for="name">Curso:</label>
+      <input 
+        type="text" 
+        class="form-control"
+        id="title" 
+        formControlName="title" 
+        placeholder="Ingrese nombre del curso">
+      <div *ngIf="courseForm.get('title')?.invalid && courseForm.get('title')?.touched">
+        Nombre del curso es requerido
+      </div>
+    </div>
+
+    <!-- Campo Apellido -->
+    <div class="form-group">
+      <label for="surname">Descripción:</label>
+      <input 
+        type="text" 
+        class="form-control"
+        id="description" 
+        formControlName="description" 
+        placeholder="Ingrese breve descripción">
+      <div *ngIf="courseForm.get('description')?.invalid && courseForm.get('description')?.touched">
+        Descripción es requerido
+      </div>
+    </div>
+
+ 
+
+  </form>
+
+   <div class="row text-center mb-3">
+
+        <div class="col text-center">
+            <button type="submit" (click)="onSubmit()" class="btn btn-success" [disabled]="courseForm.invalid" >Agregar Curso</button>
+            
+        </div>
+
+        <div class="col text-center">
+            
+            <button type="button" (click)="onReset()" class="btn btn-danger" >Salir</button>
+
+        </div>
+    
+
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="container-fluid">
+
+
+    <div class="row">
+
+    </div>
+
+    <div class="row mt-1">
+
+        <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded border">
+        <h5 class="mb-0 d-flex"><mat-icon>library_books</mat-icon> Cursos</h5>
+        <button class="btn btn-primary" (click)="newCourse()">Nuevo</button>
+        </div>
+
+    </div>
+
+    <div class="row mt-1">
+
+         <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded border">
+
+             <div  class="w-100">
+                 
+                <app-courses-table *ngIf="formVisible[0]"  [courses]="courses" (CourseDelete)="onDelete($event)" (CourseEdit)="onEdit($event)"></app-courses-table>
+                
+                <app-add-course *ngIf="formVisible[1]" (courseAdded)="addCourse($event)" (noChanges)="noChangeNewCourse($event)"></app-add-course>
+
+                <app-edit-course *ngIf="formVisible[2]" [courseEdit]="editCourse" (courseEdited)="editedCourse($event)"  (noChanges)="noChangeEditCourse($event)" ></app-edit-course>
+
+             </div>
+
+
+         </div>
+
+
+    </div>
+
+
+</div>

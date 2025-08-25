@@ -1,0 +1,38 @@
+<div class="container-fluid">
+
+
+    <div class="row">
+
+    </div>
+
+    <div class="row mt-1">
+
+        <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded border">
+        <h5 class="mb-0 d-flex"><mat-icon>supervisor_account</mat-icon> Usuarios</h5>
+        <button class="btn btn-primary" (click)="newUser()">Nuevo</button>
+        </div>
+
+    </div>
+
+    <div class="row mt-1">
+
+         <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded border">
+
+             <div  class="w-100">
+                 
+                <app-users-table *ngIf="formVisible[0]"  [users]="users" (UserDelete)="onDelete($event)" (UserEdit)="onEdit($event)"></app-users-table>
+                
+                 <app-add-user *ngIf="formVisible[1]" (userAdded)="addUser($event)" (noChanges)="noChangeNewUser($event)"></app-add-user>
+
+                <app-edit-user *ngIf="formVisible[2]" [userEdit]="editUser" (userEdited)="editedUser($event)"  (noChanges)="noChangeEditUser($event)" ></app-edit-user>
+
+             </div>
+
+
+         </div>
+
+
+    </div>
+
+
+</div>

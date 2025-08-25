@@ -1,0 +1,102 @@
+<div class="container bg-light">
+  <h2>Editar Usuario</h2>
+
+  <form class="mb-3" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    
+    <!-- Campo ID -->
+    <div class="form-group">
+      <label for="dni">ID:</label>
+      <input 
+        type="text" 
+        class="form-control"
+        id="id" 
+        formControlName="id" 
+        placeholder="Ingrese ID"
+        readonly>
+      <div *ngIf="userForm.get('id')?.invalid && userForm.get('id')?.touched" class="text-danger mt-1">
+        ID es requerido
+      </div>
+    </div>
+
+    <!-- Campo Nombre -->
+    <div class="form-group">
+      <label for="name">Nombre</label>
+      <input 
+        type="text" 
+        class="form-control"
+        id="name" 
+        formControlName="name" 
+        placeholder="Ingrese nombre del usuario">
+      <div *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched" class="text-danger mt-1">
+        Nombre del usuario es requerido
+      </div>
+    </div>
+
+    <!-- Campo Email -->
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input 
+        type="text" 
+        class="form-control"
+        id="email" 
+        formControlName="email" 
+        placeholder="Ingrese email tunombre@tudominio.com">
+      <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched" class="text-danger mt-1">
+        Descripción es requerido
+      </div>
+    </div>
+
+     <!-- Campo Password -->
+    <div class="form-group">
+        <label for="password">Password*</label>
+        <div class="input-group">
+            <input 
+            [type]="showPassword ? 'text' : 'password'" 
+            class="form-control"
+            id="password" 
+            formControlName="password" 
+            placeholder="******">
+            <button 
+            class="btn btn-outline-secondary" 
+            type="button" 
+            (click)="togglePassword()">
+            <mat-icon>{{showPassword ? 'visibility_off': 'visibility'}}</mat-icon> 
+            </button>
+        </div>
+        <div *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched" class="text-danger mt-1">
+            El password es requerido mínimo 6 caracteres
+        </div>
+    </div>
+
+    <!-- Campo Role -->
+    <div class="form-group">
+        <label for="role">Seleccione un Role:</label>
+        <select class="form-select" formControlName="role" id="role">
+            <option value="">-- Seleccionar Role--</option>
+            <option value="admin">Administrador</option>
+            <option value="user">Usuario</option>
+            <option value="standard">Standard</option>
+        </select>
+          <div *ngIf="userForm.get('role')?.invalid && userForm.get('role')?.touched" class="text-danger mt-1">
+            Role es requerido
+        </div>
+    </div>
+   
+  </form>
+
+   <div class="row text-center mb-3">
+
+        <div class="col text-center">
+            <button type="submit" (click)="onSubmit()" class="btn btn-success" [disabled]="userForm.invalid" >Editar Usuario</button>
+            
+        </div>
+
+        <div class="col text-center">
+            
+            <button type="button" (click)="onReset()" class="btn btn-danger" >Salir</button>
+
+        </div>
+    
+
+    </div>
+</div>

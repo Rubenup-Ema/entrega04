@@ -1,0 +1,132 @@
+
+  <h2>Añadir Estudiante</h2>
+
+  <form class="mb-3" [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+    
+    <!-- Campo ID -->
+    <div class="form-group">
+      <label for="dni">ID:</label>
+      <input 
+        type="text" 
+        class="form-control"
+        id="id" 
+        formControlName="id" 
+        placeholder="Ingrese ID"
+        readonly>
+      <div *ngIf="studentForm.get('id')?.invalid && studentForm.get('id')?.touched">
+        DNI es requerido
+      </div>
+    </div>
+
+    <!-- Campo DNI -->
+    <div class="form-group">
+      <label for="codigo">DNI:</label>
+      <input 
+        type="text" 
+        class="form-control"
+        id="codigo" 
+        formControlName="codigo" 
+        placeholder="Ingrese DNI">
+      <div *ngIf="studentForm.get('codigo')?.invalid && studentForm.get('codigo')?.touched">
+        DNI es requerido y debe ser mayor 5 caracteres
+      </div>
+    </div>
+
+    <!-- Campo Nombre -->
+    <div class="form-group">
+      <label for="name">Nombre:</label>
+      <input 
+        type="text" 
+        class="form-control"
+        id="name" 
+        formControlName="name" 
+        placeholder="Ingrese nombre">
+      <div *ngIf="studentForm.get('name')?.invalid && studentForm.get('name')?.touched">
+        Nombre es requerido
+      </div>
+    </div>
+
+    <!-- Campo Apellido -->
+    <div class="form-group">
+      <label for="surname">Apellido:</label>
+      <input 
+        type="text" 
+        class="form-control"
+        id="surname" 
+        formControlName="surname" 
+        placeholder="Ingrese apellido">
+      <div *ngIf="studentForm.get('surname')?.invalid && studentForm.get('surname')?.touched">
+        Apellido es requerido
+      </div>
+    </div>
+
+     <!-- Campo Email -->
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input 
+        type="text" 
+        class="form-control"
+        id="email" 
+        formControlName="email" 
+        placeholder="Ingrese el email">
+      <div *ngIf="studentForm.get('email')?.invalid && studentForm.get('email')?.touched">
+        El email es requerido
+      </div>
+    </div>
+
+ <!-- Campo Edad -->
+    <div class="form-group">
+      <label for="age">Edad:</label>
+      <input 
+        type="number" 
+        class="form-control"
+        id="age" 
+        formControlName="age" 
+        placeholder="Ingrese la edad">
+         <div *ngIf="studentForm.get('age')?.invalid && studentForm.get('age')?.touched">
+        Edad requerida >= 0
+      </div>
+    </div>
+
+
+    <!-- Campo Promedio -->
+    <div class="form-group">
+      <label for="average">Average:</label>
+      <input 
+        type="number" 
+        class="form-control"
+        id="avg" 
+        formControlName="avg" 
+        placeholder="Ingrese promedio">
+         <div *ngIf="studentForm.get('avg')?.invalid && studentForm.get('avg')?.touched">
+        Promedio requerido [0,100]
+      </div>
+    </div>
+
+    <!-- Campo Curso -->
+    <div class="form-group">
+        <label for="curso">Seleccione un curso:</label>
+        <select class="form-select" formControlName="courseId" id="cursoId">
+            <option [value]="0">-- Seleccionar --</option>
+            <option *ngFor="let c of courses" [value]="c.id">
+            {{ c.title }}
+            </option>
+        </select>
+    </div>
+  </form>
+
+   <div class="row text-center mb-3">
+
+        <div class="col text-center">
+            <button type="submit" (click)="onSubmit()" class="btn btn-success" [disabled]="studentForm.invalid" >Agregar Estudiante</button>
+            
+        </div>
+
+        <div class="col text-center">
+            
+            <button type="button" (click)="onReset()" class="btn btn-danger" >Salir</button>
+
+        </div>
+    
+
+    </div>

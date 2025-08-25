@@ -1,0 +1,12 @@
+<div class="mt-5 text-center">
+
+  <h2 mat-dialog-title>Confirmación</h2>
+  <mat-dialog-content>
+    <p>{{ data.mensaje }}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-flat-button class="btn-verde" (click)="onConfirm()">Sí</button>
+    <button mat-flat-button class="btn-rojo" (click)="onCancel()">No</button>
+  </mat-dialog-actions>
+
+</div>
