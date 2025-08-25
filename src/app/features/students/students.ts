@@ -36,9 +36,9 @@ export class Students implements OnInit {
      this.formVisible[0] = true;
   }
 
-  async loadStudents() {
+   loadStudents() {
 
-    await this._servicios.loadStudents().subscribe({
+     this._servicios.loadStudents().subscribe({
       next:   (data:Student[]) => {
 
           this.students = data;
