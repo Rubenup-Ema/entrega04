@@ -19,7 +19,7 @@ export class Breadcrumb {
     // Escucha cambios en la ruta
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((event: any) => {
+      .subscribe((event: NavigationEnd) => {
         this.componentCurrent = event.urlAfterRedirects;
       });
   }

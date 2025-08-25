@@ -91,7 +91,7 @@ describe('CoursesService', () => {
     });
 
     // interceptamos el request
-    const req = httpMock.expectOne(`${(service as any).url}/course/${courseId}`);
+    const req = httpMock.expectOne(`${service['url']}/course/${courseId}`);
     expect(req.request.method).toBe('DELETE'); 
     req.flush(deletedCourse); 
   });
