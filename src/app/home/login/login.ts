@@ -6,6 +6,9 @@ import { ServicesLogin } from '../../shared/services/services.login';
 import { Message } from '../../shared/services/message';
 import { DataLogin } from './login.entity';
 import { RoutePaths } from '../../shared/utils/routes';
+import { AuthState } from '../../ngrx/auth/auth.model';
+import { Store } from '@ngrx/store';
+import { login, loginFailure, logout } from '../../ngrx/auth/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -16,9 +19,13 @@ import { RoutePaths } from '../../shared/utils/routes';
 export class Login implements OnInit {
 
     form!: FormGroup;
+
     procesando = false;
-    constructor(private router:Router, private fb: FormBuilder, private _services: ServicesLogin, 
-      private snackBar: Message) {
+    constructor(private router:Router, private fb: FormBuilder, 
+      private _services: ServicesLogin, 
+      private snackBar: Message,
+      private store: Store<{auth: AuthState}>
+      ) {
 
          this.form =  this.fb.group({
           username: new FormControl('', [Validators.required,  Validators.email]),
@@ -40,13 +47,12 @@ export class Login implements OnInit {
 
         next: ()=>{console.log('data cargada..')},
         error: (err) => {
-          console.log(err);
+          
           this.snackBar.show(`UPS!! ha sucedido lo siguiente: ${err.message}`)}
 
       })
-      sessionStorage.setItem("user","");
-      sessionStorage.setItem("role","");
-      sessionStorage.setItem("email","");
+      
+      this.store.dispatch(logout({email:'',name:'', admin:'',logged:false}));
 
     }
 
@@ -54,23 +60,27 @@ export class Login implements OnInit {
 
       this.procesando = true;
 
-      this._services.validarLogin(this.form.get("username")?.value,this.form.get("password")?.value).subscribe({
+      const {username, password} = this.form.value;
 
+      
+       this._services.validarLogin(username, password).subscribe({
+        
+        
         next: (data:DataLogin) => {
-
-          sessionStorage.setItem("user", data.name);
-          sessionStorage.setItem("role", data.role);
-          sessionStorage.setItem("email", data.email);
-
+          
+          
+          
+          this.store.dispatch(login({email:data.email, name:data.name,admin:data.role}));
+          
           this.router.navigate(['/' + RoutePaths.HOME]);
 
         },
         error: (err) => {
-          console.log(err);
+          
           this.procesando = false;
+          this.store.dispatch(loginFailure({error:`UPS!! ha sucedido lo siguiente: ${err.message}`}));
           this.snackBar.show(`UPS!! ha sucedido lo siguiente: ${err.message}`);
-        },
-        complete: ()=> {console.log('Proceso completado')}
+        }
 
       }
       )

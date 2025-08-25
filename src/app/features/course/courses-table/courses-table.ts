@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { Course } from '../../../shared/entities/entity';
+import { ServicesLogin } from '../../../shared/services/services.login';
 
 
 
@@ -18,16 +19,27 @@ export class CoursesTable {
   @Output() CourseDelete= new EventEmitter<Course>();
 
   displayedColumns: string[] = ['id', 'title', 'description' ,'acciones']
-  role = '';
-  constructor() {
+  role: Boolean = false;
+  constructor(private _service: ServicesLogin) {
 
 
   }
 
   ngOnInit(): void {
     
-   this.role = sessionStorage.getItem("role") || '';
 
+    this._service.isAdmin().subscribe({
+
+      next: (value: Boolean) => {
+
+        this.role = value
+
+
+      }
+
+    })
+
+   
 
   }
 

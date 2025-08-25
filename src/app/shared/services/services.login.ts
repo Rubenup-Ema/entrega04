@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, of, tap, throwError } from 'rxjs';
 import { DataLogin } from '../../home/login/login.entity';
+import { Store } from '@ngrx/store';
+import { selectAdmin } from '../../ngrx/auth/auth.selectors';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +16,19 @@ export class ServicesLogin {
 
     private data: DataLogin[] = [];
 
-    constructor(private http:HttpClient) {
+    constructor(private http:HttpClient, private store:Store ) {
 
       
 
     }
+
+   isAdmin(): Observable<boolean> {
+  
+    return this.store.select(selectAdmin).pipe(
+    map(value => value === 'admin')
+    
+  );
+  }
 
     loadData(): Observable<DataLogin[]> {
     return this.http.get<DataLogin[]>(`${this.url}/user`).pipe(

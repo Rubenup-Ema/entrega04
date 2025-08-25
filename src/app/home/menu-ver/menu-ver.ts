@@ -34,7 +34,9 @@ export class MenuVer {
          break;
 
          case 4: 
-         this.router.navigate(['/'+ RoutePaths.LOGIN ])
+
+          
+          this.router.navigate(['/'+ RoutePaths.LOGIN ])
          break;
 
 

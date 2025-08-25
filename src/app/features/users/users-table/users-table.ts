@@ -3,6 +3,7 @@ import { User } from '../../../shared/entities/entity';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MaskPipe } from '../../../shared/pipe/mask-pipe-pipe'
+import { ServicesLogin } from '../../../shared/services/services.login';
 
 @Component({
   selector: 'app-users-table',
@@ -17,15 +18,25 @@ export class UsersTable {
   @Output() UserDelete= new EventEmitter<User>();
 
   displayedColumns: string[] = ['id', 'name', 'email' ,'password','role', 'acciones']
-  role = '';
-  constructor() {
+  role: Boolean = false;
+  constructor(private _service:ServicesLogin) {
 
 
   }
 
   ngOnInit(): void {
     
-    this.role = sessionStorage.getItem("role") || '';
+     this._service.isAdmin().subscribe({
+
+      next: (value: Boolean) => {
+
+        this.role = value
+
+
+      }
+
+    })
+
 
   }
 

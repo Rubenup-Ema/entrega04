@@ -4,6 +4,7 @@ import {MatTableModule} from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { FullnamePipe } from '../../../shared/pipe/fullname-pipe';
 import { Student } from '../../../shared/entities/entity';
+import { ServicesLogin } from '../../../shared/services/services.login';
 
 
 
@@ -22,15 +23,26 @@ export class StudentsTable implements OnInit {
   @Output() studentDelete= new EventEmitter<Student>();
 
   displayedColumns: string[] = ['name', 'surname', 'fullname', 'age', 'dni', 'average', 'title' , 'acciones']
-  role ='';
-  constructor() {
+  role: Boolean=false;
+  constructor(private _service:ServicesLogin) {
 
 
   }
 
   ngOnInit(): void {
     
-    this.role = sessionStorage.getItem("role") || '';
+    this._service.isAdmin().subscribe({
+
+      next: (value: Boolean) => {
+
+        this.role = value
+
+
+      }
+
+    })
+
+
 
 
   }

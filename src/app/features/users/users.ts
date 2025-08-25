@@ -49,12 +49,7 @@ export class Users {
 
       },
       error: (err) => {
-        console.log(err);
         this.snackBar.show(`UPS!! ha pasado algo ${err.message}`)
-      },
-      complete: ()=> {
-        
-        console.log('Proceso completado!!')
       },
     }
       
@@ -173,7 +168,6 @@ export class Users {
             },
             error: (err)=>{
 
-              console.log(err);
               this.snackBar.show(`Ha sucedido lo siguiente ${err.message}`);
 
             }
@@ -184,7 +178,7 @@ export class Users {
   
         )
       } else {
-        console.log('El usuario canceló');
+        this.snackBar.show('El usuario canceló');
       }
     });
   

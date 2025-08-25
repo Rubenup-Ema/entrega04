@@ -6,6 +6,8 @@ import { Breadcrumb } from "../breadcrumb/breadcrumb";
 import { MatIcon } from '@angular/material/icon';
 import { MenuVer } from "../menu-ver/menu-ver";
 import { RoutePaths } from '../../shared/utils/routes';
+import { State, Store } from '@ngrx/store';
+import { selectLogged } from '../../ngrx/auth/auth.selectors';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,23 +17,39 @@ import { RoutePaths } from '../../shared/utils/routes';
 })
 export class Dashboard implements OnInit {
 
+   logged: Boolean=false;
 
-    constructor(private router:Router) {
+    constructor(private router:Router, private store:Store) {
 
     }
 
     ngOnInit(): void {
       
-      const user = "" + sessionStorage.getItem("user");
+      this.isLogged();
 
-      if (user.trim() === "") {
-
-        this.router.navigate(['/'+ RoutePaths.LOGIN]);
-
-      }
+     
 
     }
 
    
+   isLogged() {
+
+    this.store.select(selectLogged).subscribe({
+
+      next: (value:Boolean) => {
+
+        this.logged = value;
+
+         if (!this.logged) {
+
+            this.router.navigate(['/'+ RoutePaths.LOGIN]);
+
+          }
+
+      }
+
+    })
+
+   }
 
 }

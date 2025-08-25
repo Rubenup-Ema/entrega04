@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { selectUser } from '../../ngrx/auth/auth.selectors';
 
 @Component({
   selector: 'app-main',
@@ -8,12 +11,22 @@ import { Component } from '@angular/core';
 })
 export class Main {
 
-  user = "";
+  user!: string;
 
-  constructor() {
+  constructor(private store:Store) {
 
-     this.user = "" + sessionStorage.getItem("user") + " / " + sessionStorage.getItem("role");
+      this.store.select(selectUser).subscribe({
 
+        next: (value:string) => {
+          this.user = value;
+        },
+
+
+      }
+
+        
+
+     )
 
   }
 

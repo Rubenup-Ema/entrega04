@@ -230,7 +230,6 @@ export class Students implements OnInit {
             },
             error: (err)=>{
 
-              console.log(err);
               this.snackBar.show(`Ha sucedido lo siguiente ${err.message}`);
 
             }
@@ -240,7 +239,7 @@ export class Students implements OnInit {
 
       )
     } else {
-      console.log('El usuario canceló');
+        this.snackBar.show('El usuario canceló');
     }
   });
 
