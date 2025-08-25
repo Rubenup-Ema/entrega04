@@ -1,4 +1,6 @@
-<table mat-table [dataSource]="students" class="mat-elevation-z8">
+<div class="container">
+
+ <table mat-table [dataSource]="students" class="mat-elevation-z8">
  <!-- Name Column -->
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Nombre </th>
@@ -45,10 +47,10 @@
   <ng-container matColumnDef="acciones">
     <th *matHeaderCellDef> Acciones </th>
     <tr class="text-center" *matCellDef="let element">
-      <button mat-icon-button color="primary" class="btn btn-success" (click)="onEdit(element)" [disabled]="!role">
+      <button mat-icon-button color="primary" class="btn btn-success btn-sm border" (click)="onEdit(element)" [disabled]="!role">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button color="warn" class="btn btn-danger" (click)="onDelete(element)" [disabled]="!role">
+      <button mat-icon-button color="warn" class="btn btn-danger btn-sm border" (click)="onDelete(element)" [disabled]="!role">
         <mat-icon>delete</mat-icon>
       </button>
     </tr>
@@ -59,3 +61,5 @@
 
 
 </table>
+
+</div>
