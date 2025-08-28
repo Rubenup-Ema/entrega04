@@ -5,12 +5,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { FullnamePipe } from '../../../shared/pipe/fullname-pipe';
 import { Student } from '../../../shared/entities/entity';
 import { ServicesLogin } from '../../../shared/services/services.login';
+import { CommonModule } from '@angular/common';
 
 
 
 @Component({
   selector: 'app-students-table',
-  imports: [MatTableModule, FullnamePipe, MatIconModule],
+  imports: [MatTableModule, FullnamePipe, MatIconModule, CommonModule],
   templateUrl: './students-table.html',
   styleUrl: './students-table.scss'
 })

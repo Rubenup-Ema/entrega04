@@ -3,12 +3,13 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { Course } from '../../../shared/entities/entity';
 import { ServicesLogin } from '../../../shared/services/services.login';
+import { CommonModule } from '@angular/common';
 
 
 
 @Component({
   selector: 'app-courses-table',
-  imports: [MatTableModule,  MatIconModule],
+  imports: [MatTableModule,  MatIconModule, CommonModule],
   templateUrl: './courses-table.html',
   styleUrl: './courses-table.scss'
 })

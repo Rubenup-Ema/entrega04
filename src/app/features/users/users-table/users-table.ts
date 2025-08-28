@@ -4,10 +4,11 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MaskPipe } from '../../../shared/pipe/mask-pipe-pipe'
 import { ServicesLogin } from '../../../shared/services/services.login';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-users-table',
-  imports: [MatTableModule,  MatIconModule, MaskPipe],
+  imports: [MatTableModule,  MatIconModule, MaskPipe, CommonModule],
   templateUrl: './users-table.html',
   styleUrl: './users-table.scss'
 })

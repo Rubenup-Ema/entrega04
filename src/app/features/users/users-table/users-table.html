@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="users.length>0; else procesando" class="container">
 
   <table mat-table [dataSource]="users" class="mat-elevation-z8">
  <!-- Name Column -->
@@ -54,3 +54,10 @@
 
 </div>
 
+<ng-template #procesando>
+
+  <div class="d-flex justify-content-center align-items-center">
+    <span class="text-danger">NO DATA</span>
+  </div>
+
+</ng-template>
